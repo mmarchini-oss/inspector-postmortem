@@ -12,10 +12,15 @@ const crashContext = {
   "Scripts": {},
 };
 
+const parsedScripts = {};
+
 function captureSource(scriptId) {
   if (crashContext.Scripts[scriptId] === undefined)
     session.post("Debugger.getScriptSource", { scriptId }, (err, { scriptSource }) => {
-      crashContext.Scripts[scriptId] = scriptSource;
+      crashContext.Scripts[scriptId] = {
+        params: parsedScripts[scriptId] || {},
+        source: scriptSource
+      };
     });
 }
 
@@ -94,6 +99,10 @@ let aaaa = session.on("Debugger.paused", ({ params }) => {
 
   if (params.reason != 'exception') return;
   captureCrashContext(params);
+});
+
+session.on("Debugger.scriptParsed", ({ params }) => {
+  parsedScripts[params.scriptId] = params;
 });
 
 session.post("Debugger.enable", (err, result) => {
