@@ -1,16 +1,20 @@
 {
-  "name": "playground",
+  "name": "inspector-postmortem-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run-examples": "node server/index.js",
+    "inspector-server": "node server/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "open": "^6.4.0",
+    "express": "^4.17.1",
+    "nunjucks": "^3.2.0",
     "prettyjson": "^1.2.1",
+    "puppeteer": "^1.18.1",
     "ws": "^7.1.0"
   }
 }
