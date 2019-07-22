@@ -55,3 +55,7 @@ as well.
 4. Exit will be delayed until we finish capturing the state of the process.
    Some applications won't have a problem with that, but other applications
    won't be able to cope with the exit delay.
+5. The approach used to get unhandled rejections is not optimal
+   (https://github.com/mmarchini/inspector-postmortem/blob/master/crash-collector/partial.js#L77-L89)
+   and doesn't seem reliable (I got unhandled rejections which didn't trigger
+   `Debugger.paused`).
