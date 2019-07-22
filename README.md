@@ -11,7 +11,7 @@ postmortem tool which can be used to deal with most crash scenarios.
 
 ## Demo
 
-
+[Demo server](http://nodejs-crash-inspector.mmarchini.me/)
 
 ## Implementation Overview
 
