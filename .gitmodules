@@ -3,4 +3,5 @@
 	url = https://github.com/fastify/benchmarks
 [submodule "benchmarks/promise-performance-tests"]
 	path = benchmarks/promise-performance-tests
-	url = https://github.com/v8/promise-performance-tests
+	url = https://github.com/mmarchini/promise-performance-tests
+	branch = crash-collector-tests
