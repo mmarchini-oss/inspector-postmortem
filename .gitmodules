@@ -1,0 +1,6 @@
+[submodule "benchmarks/fastify-benchmarks"]
+	path = benchmarks/fastify-benchmarks
+	url = https://github.com/fastify/benchmarks
+[submodule "benchmarks/promise-performance-tests"]
+	path = benchmarks/promise-performance-tests
+	url = https://github.com/v8/promise-performance-tests

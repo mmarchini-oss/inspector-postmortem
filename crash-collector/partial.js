@@ -72,7 +72,6 @@ let trackingPromises = false;
 let currentTracking = [];
 let previousTracking = [];
 let uncaughtException = null;
-const handlePromiseRejections = process.execArgv.includes('--unhandled-rejections=strict');
 
 session.on("Debugger.paused", ({ params }) => {
   if (params.reason == 'promiseRejection') {

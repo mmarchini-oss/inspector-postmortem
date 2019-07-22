@@ -162,6 +162,7 @@ function getCrashes() {
   for (let file in loadedFiles) {
     const uuid = loadedFiles[file];
     const crash = crashes[uuid]
+    if (!crash || !crash.Report) continue;
     const url = `/inspector/inspector.html?experiments=true&v8only=true&ws=127.0.0.1:${port}/${uuid}`;
     const pid = crash.Report.processId;
     const timestamp = new Date(crash.Report.dumpEventTimeStamp);
