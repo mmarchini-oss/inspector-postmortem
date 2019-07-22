@@ -20,7 +20,7 @@ is perfect for that.
 
 > NOTE: I actually used a slightly modified version of
 > [v8/promise-performance-tests](https://github.com/v8/promise-performance-tests) available at 
-> [mmarchini/promise-performance-tests@crash-collector-tests](https://github.com/mmarchini/promise-performance-tests/tree/crash-collector/tests)
+> [mmarchini/promise-performance-tests@crash-collector-tests](https://github.com/mmarchini/promise-performance-tests/tree/crash-collector-tests)
 
 
 | Test                            | Baseline  | With `crash-collector` |
