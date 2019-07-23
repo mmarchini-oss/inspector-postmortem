@@ -23,12 +23,7 @@ class Foo {
   }
 
   async method(a, b, c) {
-    for (let i=0; i < 10000; i++) {
-      try {
-        await foo(a, b, { lele: true });
-      } catch (err) {
-      }
-    }
+    await foo(a, b, { lele: true });
   }
 }
 

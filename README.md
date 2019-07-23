@@ -5,13 +5,71 @@ Node.js process before it crashes due to an uncaught excpetion or unhandled
 rejection. The goal is to provide a more accessible, stable and user friendly
 postmortem tool which can be used to deal with most crash scenarios.
 
+The basic workflow is:
+
+1. The application hit's an uncaught exception/unhandled rejection
+2. Before exiting, we use the Inspector Protocol to save relevant information
+   about the process (exception stack trace, scopes, scripts, etc.) as a JSON
+   file.
+3. Users can later open those JSON files and expose their content through a
+   Inspector Protocol-compliant server, allowing tools like Chrome DevTools to
+   inspect the state of the process at the crash site after the process already
+   exited.
+
 > This tool is not intended to replace core dumps entirely. It will focus on
 > JavaScript crashes, while core dumps will still be useful to investigate
 > crashes in native code (either on the runtime or third-party libraries).
 
 ## Demo
 
-[Demo server](http://nodejs-crash-inspector.mmarchini.me/)
+A demo inspector server is available
+[here](http://nodejs-crash-inspector.mmarchini.me/). It has a few crash files
+you can inspect. The main page is a list of available crash files:
+
+![](assets/demo/01.png)
+
+If you click on one of those crash files, a new tab will open with Chrome
+DevTools loaded to inspect that file:
+
+![](assets/demo/02.png)
+
+This allow you to easily inspect the process state after it crashes. This is
+useful for webservers, where you can't just pause the process and inspect it
+manually. 
+
+The current crash-collector will save the crash file to the filesystem, and the
+server will look for crash files in the filesystem, but this approach can be
+extended to upload crash files to cloud storage and the server can be extended
+to load from cloud storage, making it possible to have a single server capable
+of inspecting crashes from an entire fleet of servers.
+
+### Try it
+
+To generate crash files you just need to require `./crash-collector`. There are
+some example scripts in `examples/`, which will crash after execution. If you
+want to generate a crash file, you can run:
+
+```
+node --require=./crash-collector ./examples/uncaught-exception
+```
+
+`./crash-collector` doesn't have any dependencies, as it only uses Node.js builtin
+`inspector` module and the `process.on('uncaughtException'` event.
+
+To run the inspector server (demonstrated in the video above) you'll need to 
+install `express`, `ws` and `puppeteer`. You can install both and run the
+server with the commands below:
+
+```
+npm install
+node ./server/index.js
+```
+
+And then you can access the server in `localhost:3000`
+
+> The inspector server expects the crash files to be in the folder the process
+> is running.
+
 
 ## Implementation Overview
 

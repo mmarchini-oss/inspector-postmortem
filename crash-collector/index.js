@@ -9,5 +9,5 @@ process.on("uncaughtException", (err) => {
   const timestamp = Math.floor(new Date() / 1000);
   writeFileSync(`crash.${timestamp}.${process.pid}.json`, JSON.stringify(crashContext));
   console.error(err);
-  process.abort();
+  process.exit(1);
 });
